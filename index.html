@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta https-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./swiper/swiper.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <div v-for="(item, index) of config.floderNum" :class="'swiper-container'+index">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" v-for=" (item1, index1) of config.imgNum">
+                    <img :src="'./imgs/'+'img'+(index+1)+'/'+(index1+1)+'.jpg'" alt="">
+                </div>
+            </div>
+            <div :class="'swiper-pagination'+(item-1)"></div>
+        </div>
+    </div>
+    <script src="./vue/vue.js"></script>
+    <script src="./swiper/swiper.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                config:{
+                    url: './imgs',
+                    floderNum: 4,
+                    imgNum: 3
+                }
+            },
+            created: function () {
+                // `this` 指向 vm 实例
+
+            },
+            mounted () {
+                this.$nextTick(function(){
+                    for (let i = 0; i < 3; i++) {
+                        new Swiper('.swiper-container'+i, {
+                            loop: true,
+                            // 如果需要分页器
+                            pagination: '.swiper-pagination'+i,
+                        }) 
+                        
+                    }
+                })
+            }
+        })
+    </script>
+</body>
+
+</html>
